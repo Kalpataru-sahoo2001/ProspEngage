@@ -1,0 +1,326 @@
+.hidden {
+    display: none !important;
+  }
+  
+  .signup-container {
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 22px 69px;
+  }
+  
+  .content-wrapper {
+    display: flex;
+    gap: 80px;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .branding-section {
+    display: flex;
+    flex-direction: column;
+    color: #475569;
+    text-align: center;
+    font: 700 25px/40px Roboto;
+  }
+  
+  .logo-container {
+    display: flex;
+    min-height: 242px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .logo {
+    width: 165.58px;
+    height: 73px;
+  }
+  
+  .brand-divider {
+    margin: 0 12px;
+    color: #1e293b;
+    font-size: 24px;
+    font-weight: 300;
+  }
+  
+  .brand-name {
+    color: #1e293b;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: Roboto;
+  }
+  
+  .tagline {
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+    color: #475569;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+  
+  .tagline-subtitle {
+    display: block;
+    margin-top: 8px;
+    color: #64748b;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .hero-image {
+    aspect-ratio: 1.45;
+    object-fit: contain;
+    width: 100%;
+    max-width: 657px;
+    height: 452px;
+    align-self: center;
+  }
+  
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  
+  .signup-form-container {
+    display: flex;
+    margin-top: 21px;
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .form-title {
+    color: #1e293b;
+    text-align: center;
+    letter-spacing: -0.5px;
+    font: 800 36px/1 Roboto;
+    margin-bottom: 32px;
+  }
+  
+  .form-wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .input-field {
+    margin-bottom: 20px;
+  }
+  
+  .input-field label {
+    color: #1e293b;
+    letter-spacing: -0.08px;
+    font: 700 14px/1 Roboto;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  /* .input-field .title select.titlew {
+    width: 605.49px;
+    min-height: 54.47px;
+  } */
+  
+  .input-field input,
+  .input-field select {
+    width: 563px;
+    border-radius: 123px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    min-height: 28px;
+    padding: 12px 20px;
+    color: #475569;
+    letter-spacing: -0.11px;
+    font: 500 16px/1 Roboto;
+    outline: none;
+  }
+  
+  .input-field input:focus,
+  .input-field select:focus {
+    border-color: #2ba8e0;
+    box-shadow: 0 0 0 2px rgba(43, 168, 224, 0.2);
+  }
+  
+  .input-field input[type="tel"] {
+    width: 563px;
+    border-radius: 123px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    min-height: 28px;
+    padding: 12px 20px;
+    color: #475569;
+    letter-spacing: -0.11px;
+    font: 500 16px/1 Roboto;
+    outline: none;
+  }
+  
+  .input-field input[type="tel"]:focus {
+    border-color: #2ba8e0;
+    box-shadow: 0 0 0 2px rgba(43, 168, 224, 0.2);
+  }
+  
+  .invalid-feedback {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 12px;
+  }
+  
+  .button {
+    width: 563px;
+    min-height: 48px;
+    background-color: #2ba8e0;
+    color: #fff;
+    border-radius: 123px;
+    padding: 12px 20px;
+    font: 700 16px Roboto;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #2291c2;
+  }
+  
+  .account-link {
+    text-align: center;
+    margin-top: 24px;
+    color: #475569;
+    font-size: 15px Roboto;
+  }
+  
+  .account-link a {
+    color: #2ba8e0;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .account-link a:hover {
+    text-decoration: underline;
+  }
+  
+  .message-container {
+    margin: 0 auto 20px;
+    max-width: 605px;
+    text-align: center;
+  }
+  
+  .success-message {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border: 1px solid #badbcc;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .error-message {
+    color: #842029;
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+  }
+  
+  .progress-indicator {
+    display: flex;
+    gap: 5px;
+    width: 280px;
+    margin: 32px auto 0;
+  }
+  
+  .progress-step {
+    height: 5px;
+    flex: 1;
+    border-radius: 5px;
+  }
+  
+  .progress-active {
+    background-color: #2ba8e0;
+  }
+  
+  .progress-inactive {
+    background-color: #d9d9d9;
+  }
+  
+  @media (max-width: 991px) {
+    .signup-container {
+      padding: 20px;
+      height: auto;
+    }
+  
+    .content-wrapper {
+      flex-direction: column;
+      gap: 40px;
+    }
+  
+    .left-column,
+    .right-column {
+      width: 100%;
+    }
+  
+    .hero-image {
+      max-width: 100%;
+    }
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .button:disabled {
+    background-color: #93c5e1;
+    cursor: not-allowed;
+  }
+  
+  .input-icon {
+    position: relative;
+  }
+  
+  .input-icon i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+  }
+  
+  .input-icon input,
+  .input-icon select {
+    padding-left: 30px; /* Adjust this value based on the icon size */
+  }

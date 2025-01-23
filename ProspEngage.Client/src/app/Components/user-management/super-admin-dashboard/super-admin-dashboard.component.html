@@ -1,0 +1,86 @@
+<div class="layout">
+
+  <div *ngIf="loading" class="loading-overlay">
+    <div class="spinner">Loading...</div>
+  </div>
+
+  <div class="main" [class.dimmed]="isCreateUserFormVisible">
+    <!-- <div class="topbar">
+        <h2>Super Admin Dashboard</h2>
+      </div> -->
+
+    <div class="create-user-container">
+      <button (click)="showCreateUserForm()" class="btn btn-primary">Create User</button>
+      <div *ngIf="isCreateUserFormVisible" class="form-overlay">
+        <app-create-user (cancel)="hideCreateUserForm()" (save)="handleSave($event)"></app-create-user>
+      </div>
+    </div>
+
+    <h2>Active Users</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>RoleId</th>
+          <th>ProfileId</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of activeUsers">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.roleId }}</td>
+          <td>{{ user.profileId }}</td>
+          <td>
+            <button class="btn deactivate" (click)="deactivateUser(user.userId)">
+              Deactivate
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Pending Users</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>First Name</th>
+          <th>Middle Name</th>
+          <th>Last Name</th>
+          <th>Email Address</th>
+          <th>Mobile Number</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of pendingUsers">
+          <td>{{ user.title }}</td>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.middleName || 'N/A' }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone || 'N/A' }}</td>
+          <td>
+            <button class="approve" (click)="showApprovalForm(user.userId)" [disabled]="loading">
+              {{ loading ? 'Processing...' : 'Approve' }}
+            </button>
+            <button class="btn reject" (click)="rejectUser(user.userId)" [disabled]="loading">
+              {{ loading ? 'Processing...' : 'Reject' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <app-approval-form *ngIf="isApprovalFormVisible" [user]="selectedUser" (formSubmitted)="processApproval($event)"
+      (formCanceled)="cancelApproval()">
+    </app-approval-form>
+
+    <app-reject-user *ngIf="isRejectDialogVisible" (confirmReject)="onRejectConfirmed()"
+      (cancelReject)="onRejectCancelled()">
+    </app-reject-user>
+  </div>
+</div>

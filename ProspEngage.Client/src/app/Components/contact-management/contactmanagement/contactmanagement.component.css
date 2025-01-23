@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+
+.container-fluid {
+    width: 100%;
+    margin-left: 0px;
+}
+
+.action-group {
+    display: flex;
+    gap: 8px;
+    padding: 4px 6px;
+    /* border-bottom: 1px solid #e0e0e0; */
+    /* margin-left: 200px; */
+  }
+   
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    /* border: 1px solid #05b1f5; */
+    border: none;
+    /* background-color: white; */
+    background: rgba(5, 155, 214, 0);
+    border-radius: 4px;
+    font-size: 17px;
+    color: blue;
+    cursor: pointer;
+  }
+
+/* Table Styles */
+.table-responsive {
+    overflow-x: auto;
+    border: 2px solid rgba(243, 242, 242, 0.842);
+}
+
+
+.contact-table {
+    width: 1622px;
+    height: 460px;
+    border-collapse: collapse;
+    font-family: 'Roboto';
+    color: #333;
+}
+
+.contact-table thead th {
+    height: 44px;
+    background: #F8F8F8;
+    border: 1px solid #E0E0E0;
+    padding: 8px 16px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+}
+
+.contact-table tbody tr {
+    height: 37px;
+}
+
+.contact-table tbody td {
+    border: 1px solid #E0E0E0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    padding: 8px 16px;
+    vertical-align: middle;
+    background: #FFFFFF;
+}
+
+/* Column Widths */
+.checkbox-column {
+    width: 34px;
+    min-width: 34px !important;
+}
+
+.action-column {
+    width: 68px;
+    min-width: 68px;
+}
+
+.edit-column,
+.delete-column {
+    width: 34px;
+    min-width: 34px;
+}
+
+.contact-name-column,
+.lead-source-column,
+.email-column,
+.phone-column,
+.company-column,
+.address-column,
+.date-column {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200.57px;
+    min-width: 200.57px;
+    max-width: 205.57px;
+}
+.date-column{
+    min-width: 210px;
+    width: 130px;
+}
+
+.country-column {
+    width: 116px;
+    min-width: 116px;
+}
+
+/* Action Icons */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.bi-pencil,
+.bi-trash {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    vertical-align: middle;
+}
+
+/* Header Controls */
+.header {
+    padding: 1rem 0;
+}
+
+.search-input {
+    width: 250px;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+/* Pagination Styles */
+.pagination-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.pagination-container {
+    width: 573px;
+    height: 64px;
+    padding: 10px 0;
+    gap: 10px;
+    background: #FFFFFF;
+}
+
+.pagination-controls {
+    gap: 10px;
+    align-items: center;
+}
+
+.page-input {
+    width: 40px;
+    height: 32px;
+    text-align: center;
+    padding: 4px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.items-per-page {
+    width: 70px;
+    height: 32px;
+    padding: 4px 24px 4px 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1680px) {
+    .contact-table {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .search-input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .pagination-container {
+        width: 100%;
+    }
+}
+
+/* Remove spinner from number input */
+.page-input::-webkit-inner-spin-button,
+.page-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.no-results {
+    color: #dc3545;
+    padding: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: absolute;
+    z-index: 1000;
+    width: fit-content;
+}
+
+.search-input {
+    position: relative;
+    margin-bottom: 24px; 
+}
+
+
+.sortable-header {
+    position: relative;
+    padding-right: 25px !important;
+    cursor: pointer;
+    user-select: none;
+}
+
+.sort-icons {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sort-icons i {
+    font-size: 12px;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+}
+
+.sort-icons i:hover {
+    opacity: 1;
+}
+
+/* Add active state for sort icons */
+.sort-icons i.active {
+    opacity: 1;
+    color: #007bff;
+}
+
+.contact-table th {
+    position: relative;
+    min-width: 120px;
+}

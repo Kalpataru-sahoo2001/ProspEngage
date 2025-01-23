@@ -1,0 +1,166 @@
+<div class="container-fluid">
+    <div class="header d-flex justify-content-between align-items-center mb-3">
+        <h2>Contacts</h2>
+        <div>
+            <input type="text" id="local-search" class="form-control search-input bi bi-search" 
+             placeholder="Search contact"
+             style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%236c757d%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85a1.007 1.007 0 0 0-.115-.098zm-5.74.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-size: 16px; background-position: 10px center; padding-left: 30px;"
+                [(ngModel)]="searchQuery" (keyup)="searchContacts()" />
+            <div *ngIf="noResults" class="no-results">
+                No results found for "{{searchQuery}}"
+            </div>
+
+            <span *ngIf="loading" class="ms-2">
+                <i class="bi bi-spinner spin"></i>
+            </span>
+            <button id="bulk-btn" class="btn btn-primary mx-2" (click)="toggleBulkUpload()">
+                <i class="bi bi-upload me-1"></i> Bulk Upload
+            </button>
+            <button id="create-btn" class="btn btn-primary" (click)="toggleAddContact()">
+                <i class="bi bi-person-plus me-1"></i> Create Contact
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="action-buttons mb-3">
+            <div class="action-group" id="action-group">
+                <button class="action-btn" id="send-email-button">
+                    <i class="bi bi-envelope"></i>
+                    Send Email
+                </button>
+                <button class="action-btn" id="create-task-button">
+                    <i class="fa fa-check-square"></i>
+                    Create Task
+                </button>
+                <button class="action-btn" id="delete-button">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                </button>
+                <button class="action-btn" id="edit-button">
+                    <i class="bi bi-pencil"></i>
+                    Edit
+                </button>
+            </div>
+
+            <table class="table contact-table">
+                <!-- contactmanagement.component.html (updated table headers section) -->
+                <thead>
+                    <tr>
+                        <th class="checkbox-column">
+                            <input type="checkbox" [checked]="selectAll" (change)="toggleSelectAll()">
+                        </th>
+                        <th class="action-column" colspan="2">Actions</th>
+                        <th class="contact-name-column sortable-header">
+                            Contact Name
+                            <div class="sort-icons">
+                                <i class="bi bi-caret-up-fill" (click)="sortTable('contactName', 'asc')"></i>
+                                <i class="bi bi-caret-down-fill" (click)="sortTable('contactName', 'desc')"></i>
+                            </div>
+                        </th>
+                        <th class="lead-source-column sortable-header">
+                            Lead Source
+                            <div class="sort-icons">
+                                <i class="bi bi-caret-up-fill" (click)="sortTable('leadSource', 'asc')"></i>
+                                <i class="bi bi-caret-down-fill" (click)="sortTable('leadSource', 'desc')"></i>
+                            </div>
+                        </th>
+                        <th class="email-column sortable-header">
+                            Email ID
+                            <div class="sort-icons">
+                                <i class="bi bi-caret-up-fill" (click)="sortTable('emailID', 'asc')"></i>
+                                <i class="bi bi-caret-down-fill" (click)="sortTable('emailID', 'desc')"></i>
+                            </div>
+                        </th>
+                        <th class="phone-column sortable-header">
+                            Phone Number
+                            <div class="sort-icons">
+                                <i class="bi bi-caret-up-fill" (click)="sortTable('phoneNumber', 'asc')"></i>
+                                <i class="bi bi-caret-down-fill" (click)="sortTable('phoneNumber', 'desc')"></i>
+                            </div>
+                        </th>
+                        <th class="company-column sortable-header">
+                            Company Name
+                            <div class="sort-icons">
+                                <i class="bi bi-caret-up-fill" (click)="sortTable('companyName', 'asc')"></i>
+                                <i class="bi bi-caret-down-fill" (click)="sortTable('companyName', 'desc')"></i>
+                            </div>
+                        </th>
+                        <th class="address-column sortable-header">
+                            Address
+                            <div class="sort-icons">
+                                <i class="bi bi-caret-up-fill" (click)="sortTable('address', 'asc')"></i>
+                                <i class="bi bi-caret-down-fill" (click)="sortTable('address', 'desc')"></i>
+                            </div>
+                        </th>
+                        <th class="date-column sortable-header">
+                            Date & Time
+                            <div class="sort-icons">
+                                <i class="bi bi-caret-up-fill" (click)="sortTable('dateAndTime', 'asc')"></i>
+                                <i class="bi bi-caret-down-fill" (click)="sortTable('dateAndTime', 'desc')"></i>
+                            </div>
+                        </th>
+                        <th class="country-column sortable-header">
+                            Country
+                            <div class="sort-icons">
+                                <i class="bi bi-caret-up-fill" (click)="sortTable('country', 'asc')"></i>
+                                <i class="bi bi-caret-down-fill" (click)="sortTable('country', 'desc')"></i>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contact of contacts">
+                        <td class="checkbox-column"><input type="checkbox" [(ngModel)]="contact.isSelected"></td>
+                        <td class="edit-column" id="edit-data">
+                            <i class="bi bi-pencil cursor-pointer" (click)="onEdit(contact.id)"></i>
+                        </td>
+                        <td class="delete-column" id="delete-data">
+                            <i class="bi bi-trash cursor-pointer" (click)="onDelete(contact.id,contact.contactName)"
+                                [title]="'Delete'+ contact.contactName"></i>
+                        </td>
+                        <td class="contact-name-column">{{ contact.contactName }}</td>
+                        <td class="lead-source-column">{{ contact.leadSource }}</td>
+                        <td class="email-column">{{ contact.emailID }}</td>
+                        <td class="phone-column">{{ contact.phoneNumber }}</td>
+                        <td class="company-column">{{ contact.companyName }}</td>
+                        <td class="address-column">{{ contact.address }}</td>
+                        <td class="date-column">{{ contact.modified_On || contact.dateAndTime | date:'medium' }}</td>
+                        <td class="country-column">{{ contact.country }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagination-wrapper">
+        <div class="d-flex justify-content-between align-items-center pagination-container">
+            <div class="d-flex align-items-center pagination-controls">
+                <button class="btn btn-link text-primary p-1" [disabled]="currentPage === 1" id="left-btn"
+                    (click)="onPageChange(currentPage - 1)">
+                    <i class="bi bi-arrow-left custom-arrow"></i>
+                </button>
+                <input type="number" class="form-control page-input" [value]="currentPage"
+                    (change)="onPageChange($any($event.target).value)">
+                <button class="btn btn-link text-primary p-1" id="right-btn"
+                    [disabled]="currentPage >= totalItems / itemsPerPage" (click)="onPageChange(currentPage + 1)">
+                    <i class="bi bi-arrow-right custom-arrow"></i>
+                </button>
+                <select class="form-select items-per-page" [(ngModel)]="itemsPerPage" id="page-btn"
+                    (change)="onItemsPerPageChange($event)">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+                <span class="text-muted items-label">Items per page</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<app-bulkupload *ngIf="showBulkUpload" (close)="onBulkUploadClose()"></app-bulkupload>
+
+<!-- Updated -->
+<app-add-contact *ngIf="showAddContact" [contactId]="contactId" (cancelClicked)="onAddContactClose()"
+    (saveClicked)="onContactSaved($event)">
+</app-add-contact>

@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+  font-family: 'Roboto';
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 600px;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  z-index: 1050;
+}
+   
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+   
+   
+  body.modal-open {
+    overflow: hidden;
+  }
+   
+  .modal-header {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+  }
+   
+  .modal-header h4 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+   
+  .modal-body {
+    flex: 1;
+    overflow-y: auto;
+  }
+   
+  .form-group {
+    margin-bottom: 15px;
+  }
+   
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 100;
+  }
+   
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+   
+  .form-location-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
+   
+  .modal-footer {
+    margin-top: 25px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+   
+  .btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+   
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+   
+  .btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+   
+  .btn-secondary {
+    background-color: whitesmoke;
+    color: rgb(52, 161, 204);
+  }
+   
+  .btn:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+   
+  .form-control.ng-invalid.ng-touched {
+    border-color: red;
+  }
+   
+  .form-control.ng-invalid.ng-touched:focus {
+    background-color: #f8d7da;
+    border-color: red;
+  }
+   
+  .form-control.ng-valid.ng-touched {
+    border-color: green;
+  }
+   
+  .error-message {
+    margin-top: 5px;
+  }
+   
+  .error-message small {
+    font-size: 12px;
+    color: red;
+  }
+   
+  .modal-body {
+    flex: 1;
+    overflow-y: auto;
+  }
+   
+  .form-group {
+    margin-bottom: 15px;
+  }
+   
+  .form-location {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four equally spaced columns */
+    gap: 15px; /* Space between columns */
+  }
+   
+  .form-group label {
+    font-weight: 500;
+  }
+   
+  .form-control {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+   
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+   
+  .close-button
+  {
+    border-style: none;
+    background-color: white;
+    font-size: 25px;
+   
+  }
+   
+   

@@ -1,0 +1,163 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;  /* Position it at right */
+  width: 600px;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  z-index: 1050;
+  animation: slideInRight 0.3s ease-out;  /* Added animation */
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);  /* Shadow on the left side */
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.modal-header h4 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-location-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.modal-footer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: whitesmoke;
+  color: rgb(52, 161, 204);
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.form-control.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+.form-control.ng-invalid.ng-touched:focus {
+  background-color: #f8d7da;
+  border-color: red;
+}
+
+.form-control.ng-valid.ng-touched {
+  border-color: green;
+}
+
+.error-message {
+  margin-top: 5px;
+}
+
+.error-message small {
+  font-size: 12px;
+  color: red;
+}
+
+.close-button {
+  border-style: none;
+  background-color: white;
+  font-size: 25px;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}

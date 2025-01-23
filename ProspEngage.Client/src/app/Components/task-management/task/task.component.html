@@ -1,0 +1,73 @@
+<div class="task">
+  <div class="top">
+    <div class="left">
+      <h2>Tasks</h2>
+    </div>
+
+    <div class="right">
+      <div class="search-container">
+        <i class="bi bi-search"></i>
+        <input type="text" class="search-box" placeholder="Search Task" [(ngModel)]="searchText"
+          (input)="filterTasks()" />
+      </div>
+      <button class="btn btn-primary" (click)="toggleAddTask()">
+        <i class="bi bi-file-earmark-plus-fill"></i> Create Task
+      </button>
+    </div>
+  </div>
+
+  <!-- Api Integration -->
+  <div class="bottom">
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th class="actions" colspan="2">Actions</th>
+          <th class="subject" (click)="sortTasks('subject')">
+            Subject <i class="bi" [ngClass]="getSortIcon('subject')"></i>
+          </th>
+          <th class="duedate" (click)="sortTasks('dueDate')">
+            Due Date <i class="bi" [ngClass]="getSortIcon('dueDate')"></i>
+          </th>
+          <th class="status" (click)="sortTasks('status')">
+            Status <i class="bi" [ngClass]="getSortIcon('status')"></i>
+          </th>
+          <th class="priority" (click)="sortTasks('priority')">
+            Priority <i class="bi" [ngClass]="getSortIcon('priority')"></i>
+          </th>
+          <th class="relatedto" (click)="sortTasks('relatedTo')">
+            Related To <i class="bi" [ngClass]="getSortIcon('relatedTo')"></i>
+          </th>
+          <th class="contactName" (click)="sortTasks('contactName')">
+            Contact Name <i class="bi" [ngClass]="getSortIcon('contactName')"></i>
+          </th>
+          <th class="taskOwner" (click)="sortTasks('taskOwner')">
+            Task Owner <i class="bi" [ngClass]="getSortIcon('taskOwner')"></i>
+          </th>
+        </tr>
+  
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of filteredTasks">
+          <td class="edit-column">
+            <i class="bi bi-pencil cursor-pointer"></i>
+          </td>
+          <td class="delete-column">
+            <i class="bi bi-trash cursor-pointer" (click)="onDelete(task.id, task.name)"></i>
+          </td>
+          <td>{{ task.subject }}</td>
+          <td>{{ task.dueDate }}</td>
+          <td class="task-status">{{ task.status }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.relatedTo }}</td>
+          <td>{{ task.contactName }}</td>
+          <td>{{ task.taskOwner }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- Updated -->
+<app-create-task *ngIf="showAddTask" (cancelClicked)="onTaskCancelled()" (saveClicked)="onTaskSaved($event)">
+</app-create-task>

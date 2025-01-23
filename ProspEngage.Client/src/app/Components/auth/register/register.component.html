@@ -1,0 +1,123 @@
+<div class="signup-container">
+    <div class="content-wrapper">
+  
+      <div class="left-column">
+        <div class="branding-section">
+          <div class="logo-container">
+            <div class="logo-wrapper">
+              <img loading="lazy" src="https://kalpitatechnologies.com/assets/common/kalpita-logo.jpg" alt="Company Logo"
+                class="logo" />
+              <span class="brand-divider">|</span>
+              <span class="brand-name">Prosp-Engage</span>
+              <p class="tagline">
+                Advanced Sales Automation CRM.
+                <br />
+                <span class="tagline-subtitle">Crafting Connections, Closing Deals...</span>
+              </p>
+            </div>
+          </div>
+          <img loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/ec0f15b68a49ddfcc72a7198e612d696c65a4ed4e421a8ed9cd868f2b5f354fa?apiKey=f44af6d27c894ec5ae4913fe8bd60b76&"
+            alt="Sales Dashboard Preview" class="hero-image" />
+        </div>
+      </div>
+  
+      <div class="right-column">
+  
+          <h1 class="form-title">Sign Up!</h1>
+          <form class="signup-form-container" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  
+            <div class="input-field">
+              <div class="title">
+                <label for="title">Title *</label>
+                <select class="titlew" id="title" formControlName="title"
+                  [ngClass]="{ 'is-invalid': isFieldValid('title'), 'is-valid': registerForm.get('title')?.valid && registerForm.get('title')?.touched }">
+                  <option value="">Select Title</option>
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                  <option value="Ms">Ms</option>
+                </select>
+                <div *ngIf="isFieldValid('title')" class="invalid-feedback">
+                  {{ getErrorMessage('title') }}
+                </div>
+              </div>
+            </div>
+  
+            <div class="input-field">
+              <label for="firstName">First Name *</label>
+              <!-- Icons -->
+              <!-- <div class="input-icon">
+                <i class="fas fa-user"></i>
+                <input type="text" id="firstName" formControlName="firstName" placeholder="Enter your first name"
+                  [ngClass]="{ 'is-invalid': isFieldValid('firstName'), 'is-valid': registerForm.get('firstName')?.valid && registerForm.get('firstName')?.touched }" />
+              </div> --> 
+              <input type="text" id="firstName" formControlName="firstName" placeholder="Enter your first name"
+                [ngClass]="{ 'is-invalid': isFieldValid('firstName'), 'is-valid': registerForm.get('firstName')?.valid && registerForm.get('firstName')?.touched }" />
+              <div *ngIf="isFieldValid('firstName')" class="invalid-feedback">
+                {{ getErrorMessage('firstName') }}
+              </div>
+            </div>
+  
+            <div class="input-field">
+              <label for="middleName">Middle Name (Optional)</label>
+              <input type="text" id="middleName" formControlName="middleName" placeholder="Enter your middle name"
+                [ngClass]="{ 'is-invalid': isFieldValid('middleName'), 'is-valid': registerForm.get('middleName')?.valid && registerForm.get('middleName')?.value }" />
+              <div *ngIf="isFieldValid('middleName')" class="invalid-feedback">
+                {{ getErrorMessage('middleName') }}
+              </div>
+            </div>
+  
+            <div class="input-field">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" formControlName="lastName" placeholder="Enter your last name"
+                [ngClass]="{ 'is-invalid': isFieldValid('lastName'), 'is-valid': registerForm.get('lastName')?.valid && registerForm.get('lastName')?.touched }" />
+              <div *ngIf="isFieldValid('lastName')" class="invalid-feedback">
+                {{ getErrorMessage('lastName') }}
+              </div>
+            </div>
+  
+            <div class="input-field">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" formControlName="email" placeholder="Enter your email"
+                [ngClass]="{ 'is-invalid': isFieldValid('email'), 'is-valid': registerForm.get('email')?.valid && registerForm.get('email')?.touched }" />
+              <div *ngIf="isFieldValid('email')" class="invalid-feedback">
+                {{ getErrorMessage('email') }}
+              </div>
+            </div>
+  
+            <div class="input-field">
+              <label for="mobileNumber">Mobile Number (Optional)</label>
+              <input type="tel" id="mobileNumber" formControlName="mobileNumber" placeholder="Enter your 10-digit mobile number"
+                [ngClass]="{ 'is-invalid': isFieldValid('mobileNumber'), 'is-valid': registerForm.get('mobileNumber')?.valid && registerForm.get('mobileNumber')?.value }" />
+              <div *ngIf="isFieldValid('mobileNumber')" class="invalid-feedback">
+                {{ getErrorMessage('mobileNumber') }}
+              </div>
+            </div>
+            <button type="submit" class="button" [disabled]="!isFormValid || isLoading">
+              <span *ngIf="isLoading" class="loading-spinner"></span>
+              Sign Up
+            </button>
+          
+  
+            <div class="account-link">
+              Already have an account? <a [routerLink]="['/auth/login']">Sign In</a>
+            </div>
+          
+  
+  
+            <div class="progress-indicator" aria-label="Form progress">
+              <div class="progress-step progress-active" aria-label="Step 1 of 3 - active"></div>
+              <div class="progress-step progress-inactive" aria-label="Step 2 of 3"></div>
+              <div class="progress-step progress-inactive" aria-label="Step 3 of 3"></div>
+            </div>
+          </form>
+  
+        <app-registration-status *ngIf="showStatus" [registrationId]="registrationId">
+        </app-registration-status>
+      </div>
+    </div>
+  </div>
+  
+  
+  

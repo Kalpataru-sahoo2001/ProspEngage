@@ -1,0 +1,74 @@
+<!-- <div class="modal" *ngIf="isApprovalFormVisible">
+    <div class="modal-content">
+      <h3>Assign Role, Profile, and Status</h3>
+      <form (ngSubmit)="submitApprovalForm()">
+        <div>
+          <label for="role">Role:</label>
+          <select id="role" [(ngModel)]="selectedRole" name="role" required>
+            <option value="ceo">CEO</option>
+            <option value="vp">VP</option>
+            <option value="manager">Manager</option>
+            <option value="sales-representative">Sales Representative</option>
+          </select>
+        </div>
+        <div>
+          <label for="profile">Profile:</label>
+          <select id="profile" [(ngModel)]="selectedProfile" name="profile" required>
+            <option value="super-admin">Super Admin</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+        </div>
+        <div>
+          <label for="status">Status:</label>
+          <select id="status" [(ngModel)]="selectedStatus" name="status" required>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="deleted">Deleted</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" (click)="closeApprovalForm()" class="btn btn-secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div> -->
+ 
+ 
+  <div class="modal" *ngIf="isApprovalFormVisible">
+    <div class="modal-content">
+      <h3>Assign Role, Profile, and Status</h3>
+      <form (ngSubmit)="submitApprovalForm()">
+        <div>
+          <label for="role">Role:</label>
+          <select id="role" [(ngModel)]="selectedRole" name="role" required>
+            <option value="1">CEO</option>
+            <option value="2">VP</option>
+            <option value="3">Manager</option>
+            <option value="4">Sales Representative</option>
+          </select>
+        </div>
+        <div>
+          <label for="profile">Profile:</label>
+          <select id="profile" [(ngModel)]="selectedProfile" name="profile" required>
+            <option value="1">Super Admin</option>
+            <option value="2">Admin</option>
+            <option value="3">User</option>
+          </select>
+        </div>
+        <div>
+          <label for="status">Status:</label>
+          <select id="status" [(ngModel)]="selectedStatus" name="status" required>
+            <option value="1">Active</option>
+            <option value="2">Inactive</option>
+            <option value="3">Deleted</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" (click)="closeApprovalForm()" class="btn btn-secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>

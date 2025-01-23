@@ -1,0 +1,165 @@
+body {
+    margin: 0;
+  }
+   
+  .container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+  }
+   
+  .illustration-section {
+    flex: 1;
+    padding: 2rem;
+    background-color: #ffffff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+   
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+   
+  .logo img {
+    height: 40px;
+   
+  }
+   
+  .vertical-line {
+    width: 2px;
+    height: 40px;
+    background-color: #ccc;
+  }
+   
+  .prosp-engage {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+  }
+   
+  h1 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+   
+  .subtitle {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    font-size: 20px;
+  }
+   
+  .illustration img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+  }
+   
+  .login-form-section {
+    flex: 1;
+    padding: 2rem;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+   
+  .login-form-section h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+  }
+   
+  .login-form .submit-btn {
+    width: 100%;
+    width: 563px;
+    height: 48px;
+    padding: 0.75rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+  }
+   
+  .login-form .submit-btn:hover {
+    background-color: #2980b9;
+  }
+   
+  .signup-prompt {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #4a5568;
+    font-size: 0.875rem;
+  }
+   
+  .signup-prompt .signup-link {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+  }
+   
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+   
+    .illustration-section,
+    .login-form-section {
+      flex: none;
+      padding: 2rem;
+      order: 1;
+    }
+   
+    .illustration img {
+      max-width: 100%;
+    }
+   
+    .login-form-section {
+      padding: 1rem;
+    }
+   
+    .login-form .submit-btn {
+      max-width: 100%;
+    }
+  }
+   
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+   
+    .subtitle {
+      font-size: 0.875rem;
+     
+    }
+   
+    .logo img {
+      height: 30px;
+    }
+   
+    .prosp-engage {
+      font-size: 1rem;
+    }
+   
+    .login-form .submit-btn {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+    }
+  }

@@ -1,0 +1,286 @@
+<!-- <app-toast
+dashboard  *ngIf="showNotification"
+[message]="notificationMessage"
+[type]="notificationType"
+  (close)="onNotificationClose()"
+  id="toast-notification">
+</app-toast> -->
+ 
+<app-create-lead
+  *ngIf="isCreateLeadFormVisible"
+  (cancel)="hideCreateLeadForm()"
+  (leadCreated)="onLeadCreated($event)"
+  id="create-lead-form">
+</app-create-lead>
+ 
+<div class="container-fluid" id="main-container">
+ 
+  <div class="dashboard-header" id="dashboard-header">
+    <div class="title-section" id="title-section">
+      <h2 id="dashboard-title">Leads</h2>
+    </div>
+ 
+    <div class="actions-section" id="actions-section">
+      <!-- Search Bar -->
+      <div class="search-container" id="search-container">
+        <i class="bi bi-search search-icon"></i>
+        <input
+          type="text"
+          class="form-control search-input"
+          [(ngModel)]="searchQuery"
+          (keyup)="searchLeads()"
+          [placeholder]="'Search leads '"
+        />
+        <div *ngIf="noResults" class="no-results">
+          No results found for "{{searchQuery}}"
+        </div>
+      </div>
+ 
+      <button class="create-lead-btn" (click)="showCreateLeadForm()" id="create-lead-button">
+        <i class="bi bi-plus"></i>
+        Create Lead
+      </button>
+    </div>
+  </div>
+ 
+  <div *ngIf="isCreateLeadFormVisible" class="form-overlay" id="form-overlay">
+    <app-create-lead
+      (cancel)="hideCreateLeadForm()"
+      (save)="handleSave($event)"
+      (leadCreated)="onLeadCreated($event)"
+      id="app-create-lead">
+    </app-create-lead>
+  </div>
+ 
+  <div class="action-group" id="action-group">
+    <button class="action-btn" id="send-email-button">
+      <i class="bi bi-envelope"></i>
+      Send Email
+    </button>
+    <button class="action-btn" id="create-task-button">
+      <i class="bi bi-list-check"></i>
+      Create Task
+    </button>
+    <button class="action-btn" id="delete-button">
+      <i class="bi bi-trash"></i>
+      Delete
+    </button>
+    <button class="action-btn" id="edit-button">
+      <i class="bi bi-pencil"></i>
+      Edit
+    </button>
+  </div>
+ 
+  <div class="dashboard-container" id="dashboard-container">
+    <div *ngIf="!selectedLead; else viewLead" class="table-responsive" id="table-container">
+      <table class="leads-table" id="leads-table">
+        <thead>
+          <tr>
+            <td class="checkbox-column" id="checkbox-column-header">
+              Assign<input
+                type="checkbox"
+                id="select-all-checkbox"
+                [checked]="areAllLeadsSelected()"
+                (change)="toggleAllLeads($event)"
+              >
+            </td>
+            <th class="action-column" id="actions-column-header">Actions</th>
+            <th class="sortable-header">
+              Status
+              <div class="sort-icons">
+                <i class="bi bi-caret-up-fill" (click)="sortTable('leadStatus', 'asc')"></i>
+                <i class="bi bi-caret-down-fill" (click)="sortTable('leadStatus', 'desc')"></i>
+              </div>
+            </th>
+            <th class="sortable-header">
+              First Name
+              <div class="sort-icons">
+                <i class="bi bi-caret-up-fill" (click)="sortTable('firstName', 'asc')"></i>
+                <i class="bi bi-caret-down-fill" (click)="sortTable('firstName', 'desc')"></i>
+              </div>
+            </th>
+            <th class="sortable-header">
+              Last Name
+              <div class="sort-icons">
+                <i class="bi bi-caret-up-fill" (click)="sortTable('lastName', 'asc')"></i>
+                <i class="bi bi-caret-down-fill" (click)="sortTable('lastName', 'desc')"></i>
+              </div>
+            </th>
+            <th class="sortable-header">
+              Job Title
+              <div class="sort-icons">
+                <i class="bi bi-caret-up-fill" (click)="sortTable('jobTitle', 'asc')"></i>
+                <i class="bi bi-caret-down-fill" (click)="sortTable('jobTitle', 'desc')"></i>
+              </div>
+            </th>
+          <th class="sortable-header">
+            Email
+            <div class="sort-icons">
+              <i class="bi bi-caret-up-fill" (click)="sortTable('email', 'asc')"></i>
+              <i class="bi bi-caret-down-fill" (click)="sortTable('email', 'desc')"></i>
+            </div>
+          </th>
+          <th class="sortable-header">
+            Phone Number
+            <div class="sort-icons">
+              <i class="bi bi-caret-up-fill" (click)="sortTable('phoneNumber', 'asc')"></i>
+              <i class="bi bi-caret-down-fill" (click)="sortTable('phoneNumber', 'desc')"></i>
+            </div>
+          </th>
+          <th class="sortable-header">
+            Company Name
+            <div class="sort-icons">
+              <i class="bi bi-caret-up-fill" (click)="sortTable('company', 'asc')"></i>
+              <i class="bi bi-caret-down-fill" (click)="sortTable('company', 'desc')"></i>
+            </div>
+          </th>
+          <th class="sortable-header">
+            Deal Size
+            <div class="sort-icons">
+              <i class="bi bi-caret-up-fill" (click)="sortTable('dealSize', 'asc')"></i>
+              <i class="bi bi-caret-down-fill" (click)="sortTable('dealSize', 'desc')"></i>
+            </div>
+          </th>
+       
+          <th>Source Profile</th>
+          <th class="sortable-header">
+            No. Of Employees
+            <div class="sort-icons">
+              <i class="bi bi-caret-up-fill" (click)="sortTable('numberOfEmployees', 'asc')"></i>
+              <i class="bi bi-caret-down-fill" (click)="sortTable('numberOfEmployees', 'desc')"></i>
+            </div>
+          </th>
+          <th class="sortable-header">
+           Budget($)
+            <div class="sort-icons">
+              <i class="bi bi-caret-up-fill" (click)="sortTable('budget', 'asc')"></i>
+              <i class="bi bi-caret-down-fill" (click)="sortTable('budget', 'desc')"></i>
+            </div>
+          </th>
+          <th class="sortable-header">
+            Authority
+             <div class="sort-icons">
+               <i class="bi bi-caret-up-fill" (click)="sortTable('authority', 'asc')"></i>
+               <i class="bi bi-caret-down-fill" (click)="sortTable('authority', 'desc')"></i>
+             </div>
+           </th>
+           <th class="sortable-header">
+            Need
+             <div class="sort-icons">
+               <i class="bi bi-caret-up-fill" (click)="sortTable('need', 'asc')"></i>
+               <i class="bi bi-caret-down-fill" (click)="sortTable('need', 'desc')"></i>
+             </div>
+           </th>
+           <th class="sortable-header">
+            TimeLine
+             <div class="sort-icons">
+               <i class="bi bi-caret-up-fill" (click)="sortTable('timeline', 'asc')"></i>
+               <i class="bi bi-caret-down-fill" (click)="sortTable('timeline', 'desc')"></i>
+             </div>
+           </th>
+           <th class="sortable-header">
+            Lead Source
+             <div class="sort-icons">
+               <i class="bi bi-caret-up-fill" (click)="sortTable('leadSource', 'asc')"></i>
+               <i class="bi bi-caret-down-fill" (click)="sortTable('leadSource', 'desc')"></i>
+             </div>
+           </th>
+           <th class="sortable-header">
+            Comments
+             <div class="sort-icons">
+               <i class="bi bi-caret-up-fill" (click)="sortTable('comments', 'asc')"></i>
+               <i class="bi bi-caret-down-fill" (click)="sortTable('comments', 'desc')"></i>
+             </div>
+           </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="!loading && !error">
+            <tr *ngFor="let lead of paginatedLeads" id="lead-row-{{lead.leadId}}">
+              <td class="checkbox-column">
+                <input
+                  type="checkbox"
+                  [checked]="isLeadSelected(lead.leadId)"
+                  (change)="toggleLeadSelection(lead.leadId, $event)"
+                  id="lead-checkbox-{{lead.leadId}}">
+              </td>
+              <td class="action-column">
+                <div class="action-buttons" id="action-buttons-{{lead.leadId}}">
+                  <button class="btn-edit" (click)="showEditLeadForm(lead)" id="edit-button-{{lead.leadId}}">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button class="btn-delete" (click)="showDeleteDialog(lead.leadId)" id="delete-button-{{lead.leadId}}">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </div>
+              </td>
+              <td>
+                <span [class]="'status-badge ' + getStatusClass(lead.leadStatus)" id="status-badge-{{lead.leadId}}">
+                  {{lead.leadStatus}}
+                </span>
+              </td>
+              <td><a href="javascript:void(0)" (click)="onLeadClick(lead)" id="lead-first-name-{{lead.leadId}}">{{ lead.firstName }}</a></td>
+              <td id="lead-last-name-{{lead.leadId}}">{{ lead.lastName }}</td>
+              <td id="lead-job-title-{{lead.leadId}}">{{ lead.jobTitle }}</td>
+              <td id="lead-email-{{lead.leadId}}">{{ lead.email }}</td>
+              <td id="lead-phone-{{lead.leadId}}">{{ lead.phoneNumber }}</td>
+              <td id="lead-company-{{lead.leadId}}">{{ lead.company }}</td>
+              <td id="lead-deal-size-{{lead.leadId}}">{{ lead.dealSize | number:'1.2-2' }}</td>
+              <td id="lead-source-profile-{{lead.leadId}}">
+                <a [href]="getLinkedInUrl(lead.sourceProfile)" target="_blank" *ngIf="lead.sourceProfile">View Profile</a>
+              </td>
+              <td class="number-column" id="lead-employees-{{lead.leadId}}">{{ lead.numberOfEmployees || 'N/A' }}</td>
+              <td class="number-column" id="lead-budget-{{lead.leadId}}">{{ lead.budget | currency }}</td>
+              <td id="lead-authority-{{lead.leadId}}">{{ lead.authority }}</td>
+              <td id="lead-need-{{lead.leadId}}">{{ lead.need }}</td>
+              <td id="lead-timeline-{{lead.leadId}}">{{ lead.timeline }}</td>
+              <td id="lead-source-{{lead.leadId}}">{{ lead.leadSource }}</td>
+              <td id="lead-comments-{{lead.leadId}}">{{ lead.comments || 'No comments available' }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <div *ngIf="loading" class="loading-state" id="loading-state">Loading leads...</div>
+      <div *ngIf="error" class="error-state" id="error-state">{{error}}</div>
+    </div>
+ 
+    <ng-template #viewLead>
+      <app-view-lead [lead]="selectedLead" (close)="closeView()" id="view-lead"></app-view-lead>
+    </ng-template>
+ 
+    <div class="pagination-container" id="pagination-container">
+      <div class="assign-container" id="assign-container">
+        <select class="assign-select" [(ngModel)]="selectedUser" id="assign-select">
+          <option value="">Assign to</option>
+          <option *ngFor="let user of users" [value]="user.userId" id="assign-user-{{user.userId}}">
+            {{user.username}}
+          </option>
+        </select>
+        <button class="assign-btn" (click)="assignLeads()" id="assign-button">
+          Assign {{selectedLeadIds.length > 0 ? '(' + selectedLeadIds.length + ' selected)' : ''}}
+        </button>
+      </div>
+ 
+      <div class="items-per-page" id="items-per-page">
+        <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()" class="assign-select" id="items-per-page-select">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+        <span>Items per page</span>
+        <span id="items-info">{{((currentPage - 1) * pageSize) + 1}}-{{Math.min(currentPage * pageSize, totalItems)}} of {{totalItems}} items</span>
+      </div>
+ 
+      <div class="pagination-controls" id="pagination-controls">
+        <button class="page-btn" (click)="previousPage()" [disabled]="currentPage === 1" id="previous-page-button">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <span id="current-page-info">Page {{currentPage}} of {{totalPages}}</span>
+        <button class="page-btn" (click)="goToNextPage()" [disabled]="currentPage === totalPages" id="next-page-button">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+ 

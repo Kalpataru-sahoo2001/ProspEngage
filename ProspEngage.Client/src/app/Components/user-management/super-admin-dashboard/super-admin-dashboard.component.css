@@ -1,0 +1,417 @@
+/* General layout */
+body {
+  display: flex;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+ 
+div {
+  margin-bottom: 20px;
+}
+ 
+h2 {
+  font-family: 'Arial', sans-serif;
+  color: #007bff;
+  margin-top: 30px;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 10px;
+}
+ 
+/* Buttons */
+button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+ 
+button:hover {
+  transform: translateY(-2px);
+}
+ 
+button:active {
+  transform: translateY(1px);
+}
+ 
+button.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+ 
+button.btn-primary:hover {
+  background-color: #0056b3;
+}
+ 
+button.delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+ 
+button.delete:hover {
+  background-color: #c82333;
+}
+ 
+button.approve {
+  background-color: #28a745;
+  color: #fff;
+}
+ 
+button.approve:hover {
+  background-color: #218838;
+}
+ 
+button.reject {
+  background-color: #6c757d;
+  color: white;
+}
+ 
+button.reject:hover {
+  background-color: #5a6268;
+}
+ 
+/* Tables */
+table {
+  width:100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+ 
+thead {
+  background-color: #6897c9;
+  color: #fff;
+  text-transform: uppercase;
+}
+ 
+thead th {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-right: 1px solid #ffffff;
+}
+ 
+thead th:last-child {
+  border-right: none;
+}
+ 
+tbody tr {
+  transition: background-color 0.3s ease;
+}
+ 
+tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+ 
+tbody tr:hover {
+  background-color: #e9ecef;
+}
+ 
+td {
+  padding: 12px;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #dee2e6;
+}
+ 
+td:last-child {
+  text-align: center;
+}
+ 
+td button {
+  margin: 0 5px;
+}
+ 
+/* Add these new styles to your existing CSS */
+.deactivate {
+  background-color: #dc3545;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+ 
+.deactivate:hover {
+  background-color: #c82333;
+}
+ 
+.deactivate:active {
+  transform: translateY(1px);
+}
+ 
+/* Update your existing table styles to handle the new deactivate button */
+td button {
+  margin: 0 4px;
+}
+ 
+/* Add loading state styles */
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  color: #666;
+}
+ 
+/* Add error state styles */
+.error {
+  color: #dc3545;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+ 
+ 
+/* Responsive Design */
+@media (max-width: 768px) {
+  table {
+    font-size: 12px;
+  }
+ 
+  thead {
+    display: none; /* Hide table headers for small screens */
+  }
+ 
+  tbody, tr, td {
+    display: block;
+    width: 100%;
+  }
+ 
+  tr {
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+ 
+  td {
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+    border: none;
+  }
+ 
+  td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    font-weight: bold;
+    color: #007bff;
+    text-transform: capitalize;
+  }
+}
+ 
+/* Sidebar Styling */
+/* .sidebar {
+  width: 199px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+} */
+ 
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+ 
+.menu {
+  list-style: none;
+  padding: 0;
+}
+ 
+.menu li {
+  margin-bottom: 15px;
+}
+ 
+.menu li a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+ 
+.menu li a i {
+  margin-right: 8px;
+}
+ 
+.menu li a:hover {
+  color: #007bff;
+}
+ 
+/* Main Content and Topbar */
+/* .main {
+  margin-left: 240px; 
+  width: calc(100% - 240px);
+  display: flex;
+  flex-direction: column;
+} */
+ 
+.topbar {
+  background-color: #c6c9e2;
+  height: 75px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 240px; /* Adjust to sidebar width */
+  right: 0;
+  z-index: 1000;
+}
+ 
+
+/* .create-user-container {
+  position: absolute; 
+  top: -60px; 
+  right: 30px;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+} */
+
+.create-user-container {
+  position: relative;
+  z-index: 1500; /* Higher than regular content */
+}
+
+.create-user-container .btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-user-container .btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.create-user-container .btn-primary:active {
+  background-color: #004085;
+  transform: translateY(1px);
+}
+
+ 
+/* Overlay container for the form */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 2000; /* Higher than header's z-index */
+  padding-top: 65px; /* Match header height */
+}
+
+ 
+/* Icon Buttons */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin: 0 5px;
+  font-size: 18px;
+}
+ 
+.icon-btn.edit i {
+  color: #ffc107; /* Yellow for Edit */
+}
+ 
+.icon-btn.delete i {
+  color: #dc3545; /* Red for Delete */
+}
+ 
+.icon-btn:hover {
+  opacity: 0.8;
+}
+ 
+/* Layout Structure */
+.layout {
+  width: 100%;
+  /* display: flex;
+  height: 100vh;
+  font-family: 'Arial', sans-serif; */
+}
+
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2100; /* Higher than form overlay */
+}
+
+.spinner {
+  padding: 20px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.main {
+  margin-left: -10px; /* Reduced from 240px to move tables left */
+  padding: 0 20px; /* Reduced padding to move content left */
+  /* width: calc(100% - 200px); */
+  width: 100%;
+}
+
+.main.dimmed {
+  position: relative;
+}
+
+.main.dimmed::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1400; /* Lower than form overlay but higher than regular content */
+}
+
+/* Moving tables up by adjusting margins */
+h2 {
+  margin-top: 15px; /* Reduced top margin */
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+}
+
+

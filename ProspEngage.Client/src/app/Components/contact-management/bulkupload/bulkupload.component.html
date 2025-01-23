@@ -1,0 +1,106 @@
+<div class="modal-backdrop">
+  <div class="bulk-upload-container">
+    @if (showAlert) {
+      <div class="alert-overlay">
+        <div class="alert-box">
+          <div class="alert-content">
+            <div class="alert-header">
+              <h3>Alert</h3>
+              <button class="close-alert" (click)="closeAlert()">×</button>
+            </div>
+            <div class="alert-message">
+              {{ alertMessage }}
+            </div>
+            <div class="alert-footer">
+              <button class="alert-ok-button" (click)="closeAlert()">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    
+    <div class="bulk-upload-header">
+      <h2>Contacts (Bulk Upload)</h2>
+      <button class="close-button" (click)="closeModal()">×</button>
+    </div>
+
+    <div class="upload-area" 
+         [class.drag-over]="dragOver" 
+         (dragover)="onDragOver($event)"
+         (dragleave)="onDragLeave($event)" 
+         (drop)="onDrop($event)">
+      <div class="upload-icon">
+        <i class="bi bi-file-earmark-arrow-up-fill"></i>
+      </div>
+      <p><b>Drag and Drop files here or </b> <span class="choose-text" (click)="fileInput.click()">choose files</span></p>
+      <input type="file" #fileInput (change)="onFileSelected($event)" accept=".xls,.xlsx,.csv" class="d-none" multiple>
+    </div>
+
+    <div class="file-info">
+      <p class="support-text">Support formats: XLS, XLSX </p>
+      <p class="max-size">Maximum Size: 25MB per file</p>
+    </div>
+
+    <div class="sample-file-section">
+      <p class="sample-text">Download template file: </p>
+      <button class="preview-btn" (click)="downloadSampleFile()">
+        <i class="bi bi-download"></i>
+        Download Format
+      </button>
+    </div>
+
+    <div class="selected-files">
+      @for (fileStatus of selectedFiles; track fileStatus.file.name; let i = $index) {
+        <div class="file-details" [class]="fileStatus.status">
+          <div class="excel-icon">
+            <i class="bi bi-file-earmark-excel-fill"></i>
+          </div>
+          <div class="file-text">
+            <p>{{fileStatus.file.name}}</p>
+            <div class="file-metadata">
+              <p>{{formatFileSize(fileStatus.file.size)}} - {{fileStatus.records}} records</p>
+              @if (fileStatus.message) {
+                <p class="status-message">{{fileStatus.message}}</p>
+              }
+            </div>
+          </div>
+          @if (fileStatus.status !== 'processing') {
+            <button class="remove-file" (click)="removeFile(i)">
+              <i class="bi bi-x"></i>
+            </button>
+          }
+          <div class="status-indicator">
+            @switch (fileStatus.status) {
+              @case ('processing') {
+                <div class="spinner"></div>
+              }
+              @case ('success') {
+                <i class="bi bi-check-circle-fill text-success"></i>
+              }
+              @case ('error') {
+                <i class="bi bi-x-circle-fill text-danger"></i>
+              }
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="total-records" *ngIf="selectedFiles.length > 0">
+      <span>Total Files: </span>
+      <span class="count">{{selectedFiles.length}}</span>
+      <span> | Total Records: </span>
+      <span class="count">{{totalRecords}}</span>
+    </div>
+
+    <div class="action-buttons">
+      <button class="cancel-btn" 
+              (click)="closeModal()" 
+              [disabled]="uploadInProgress">Cancel</button>
+      <button class="upload-btn" 
+              [disabled]="selectedFiles.length === 0 || uploadInProgress"
+              (click)="uploadFiles()">
+        Upload Contacts
+      </button>
+    </div>
+  </div>

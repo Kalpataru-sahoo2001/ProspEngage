@@ -1,0 +1,261 @@
+<div class="body">
+    <div class="modal-header">
+      <h2>Create Lead</h2>
+      <!-- Cancel button -->
+      <button type="button" class="close-button" (click)="onCancel()">×</button>
+    </div>
+   
+    <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" class="company-form lead-form" id="form-div">
+   
+      <!-- Lead Details Section -->
+      <div class="form-row">
+       
+        <div class="form-field">
+          <label for="status">Status</label>
+          <select formControlName="status">
+            <!-- <option value="New">New</option> -->
+            <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
+          </select>
+          <div class="error-message" *ngIf="companyForm.get('status')?.invalid && companyForm.get('status')?.touched">
+            Status is required.
+          </div>
+        </div>
+      </div>
+      <!-- Contact Details Section -->
+      <div formArrayName="contacts">
+        <div *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i">
+         
+          <div class="contact-header" (click)="toggleContact(i)">
+            <button type="button" class="toggle-btn">
+              <i *ngIf="expandedContacts[i]" class="fas fa-chevron-up"></i>
+              <i *ngIf="!expandedContacts[i]" class="fas fa-chevron-down"></i>
+            </button>
+            <span>Contact {{ i + 1 }}</span>
+            <button (click)="removeContact(i, $event)" class="delete-btn">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+          <div class="contact-body" *ngIf="expandedContacts[i]">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name <span class="required">*</span></label>
+                <input id="firstName{{i}}" type="text" formControlName="firstName" placeholder="First Name">
+                <div class="error-message" *ngIf="contact.get('firstName')?.invalid && contact.get('firstName')?.touched">
+                  First Name is required.
+                </div>
+              </div>
+              <br>
+              <br>
+              <div class="form-group">
+                <label>Last Name <span class="required">*</span></label>
+                <input id="lastName{{i}}" type="text" formControlName="lastName" placeholder="Last Name">
+                <div class="error-message" *ngIf="contact.get('lastName')?.invalid && contact.get('lastName')?.touched">
+                  Last Name is required.
+                </div>
+              </div>
+            </div>
+   
+            <!-- Other contact fields -->
+            <div class="form-row">
+              <div class="form-group">
+                <label>Job Title <span class="required">*</span></label>
+                <input id="jobTitle{{i}}" type="text" formControlName="jobTitle" placeholder="Job Title">
+                <div class="error-message" *ngIf="contact.get('jobTitle')?.invalid && contact.get('jobTitle')?.touched">
+                  Job Title is required.
+                </div>
+              </div>
+              <br>
+              <div class="form-group">
+                <label>Phone Number <span class="required">*</span></label>
+                <input id="phoneNumber{{i}}" type="tel" formControlName="phone" placeholder="+91 XXXXXXXXXX">
+                <div class="error-message" *ngIf="contact.get('phone')?.invalid && contact.get('phone')?.touched">
+                  Valid Phone Number is required.
+                </div>
+              </div>
+            </div>
+   
+            <div class="form-row">
+              <div class="form-group">
+                <label>Email ID <span class="required">*</span></label>
+                <input id="emailId{{i}}" type="email" formControlName="email" placeholder="Email">
+                <div class="error-message" *ngIf="contact.get('email')?.invalid && contact.get('email')?.touched">
+                  Valid Email is required.
+                </div>
+              </div>
+              <br>
+              <div class="form-group">
+                <label>SourceProfile </label>
+                <input id="SourceProfile{{i}}" type="url" formControlName="SourceProfile" placeholder="https://linkedin.com/in/username">
+                <div class="error-message" *ngIf="contact.get('SourceProfile')?.invalid && contact.get('SourceProfile')?.touched">
+                  Valid URL is required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+      <!-- Add More Contacts Button -->
+      <button type="button" class="add-contact-btn" (click)="addContact()">+ Add More..</button>
+   
+      <!-- Company Details Section -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="companyName">Company Name <span class="required">*</span></label>
+          <input id="companyName" type="text" formControlName="companyName">
+          <div class="error-message" *ngIf="companyForm.get('companyName')?.invalid && companyForm.get('companyName')?.touched">
+            Company Name is required.
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="DealSize">Deal Size <span class="required">*</span></label>
+          <input id="DealSize" type="text" formControlName="DealSize">
+          <div class="error-message" *ngIf="companyForm.get('DealSize')?.invalid && companyForm.get('DealSize')?.touched">
+            Deal Size is required.
+          </div>
+        </div>
+      </div>
+   
+      <!-- Other company fields -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="employeeCount">No. of Employees </label>
+          <input id="employeeCount" type="number" formControlName="employeeCount">
+          <div class="error-message" *ngIf="companyForm.get('employeeCount')?.invalid && companyForm.get('employeeCount')?.touched">
+            No. of Employees is required.
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="budget">Budget ($) <span class="required">*</span></label>
+          <input id="budget" type="number" formControlName="budget">
+          <div class="error-message" *ngIf="companyForm.get('budget')?.invalid && companyForm.get('budget')?.touched">
+            Budget is required.
+          </div>
+        </div>
+      </div>
+   
+      <div class="form-row">
+        <div class="form-group">
+          <label for="addressLine1">Address Line 1 <span class="required">*</span></label>
+          <input id="addressLine1" type="text" formControlName="addressLine1">
+          <div class="error-message" *ngIf="companyForm.get('addressLine1')?.invalid && companyForm.get('addressLine1')?.touched">
+            Address Line 1 is required.
+          </div>
+        </div>
+      </div>
+   
+      <div class="form-row">
+        <div class="form-group">
+          <label for="country">Country <span class="required">*</span></label>
+          <select id="country" formControlName="country" (change)="onCountryChange($event)">
+            <option value="">Select Country</option>
+            <option *ngFor="let country of countries" [value]="country.countryId">
+              {{country.countryName}}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="companyForm.get('country')?.invalid && companyForm.get('country')?.touched">
+            Country is required.
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="state">State <span class="required">*</span></label>
+          <select id="state" formControlName="state">
+            <option value="">Select State</option>
+            <option *ngFor="let state of states" [value]="state.stateId">
+              {{state.stateName}}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="companyForm.get('state')?.invalid && companyForm.get('state')?.touched">
+            State is required.
+          </div>
+        </div>
+      </div>
+   
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City <span class="required">*</span></label>
+          <input id="city" type="text" formControlName="city">
+          <div class="error-message" *ngIf="companyForm.get('city')?.invalid && companyForm.get('city')?.touched">
+            City is required.
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="zip">ZIP <span class="required">*</span></label>
+          <input id="zip" type="text" formControlName="zip">
+          <div class="error-message" *ngIf="companyForm.get('zip')?.invalid && companyForm.get('zip')?.touched">
+            ZIP is required.
+          </div>
+        </div>
+      </div>
+   
+      <div class="form-row">
+        <div class="form-group">
+          <label for="authority">Authority <span class="required">*</span></label>
+          <input id="authority" type="text" formControlName="authority">
+          <div class="error-message" *ngIf="companyForm.get('authority')?.invalid && companyForm.get('authority')?.touched">
+            Authority is required.
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="need">Need <span class="required">*</span></label>
+          <input id="need" type="text" formControlName="need">
+          <div class="error-message" *ngIf="companyForm.get('need')?.invalid && companyForm.get('need')?.touched">
+            Need is required.
+          </div>
+        </div>
+      </div>
+       
+      <div class="form-row">
+        <div class="form-group">
+          <label for="timeline">Timeline<span class="required">*</span></label>
+          <input id="timeline" type="text" formControlName="timeline">
+          <div class="error-message" *ngIf="companyForm.get('timeline')?.invalid && companyForm.get('timeline')?.touched">
+            Timeline is required.
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="leadSource">Lead Source<span class="required">*</span></label>
+          <input id="leadSource" type="text" formControlName="leadSource">
+          <div class="error-message" *ngIf="companyForm.get('leadSource')?.invalid && companyForm.get('leadSource')?.touched">
+            Lead Source is required.
+          </div>
+        </div>
+      </div>
+   
+      <div class="form-group">
+        <label for="comments">Comments</label>
+        <textarea id="comments" formControlName="comments" rows="3"></textarea>
+        <div class="error-message" *ngIf="companyForm.get('comments')?.invalid && companyForm.get('comments')?.touched">
+          Comments are required.
+        </div>
+      </div>
+      <div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
+        Lead has been successfully created! Redirecting to dashboard...
+      </div>
+     
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+   
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+   
+      <div class="form-actions">
+        <button type="button" (click)="onCancel()"  class="tn-cancel"[disabled]="loading">Cancel</button>
+        <button type="submit" class="save-button">
+          {{ loading ? 'Saving...' : 'Save' }}
+        </button>
+     
+        </div>
+    </form>
+     
+   
+   
+

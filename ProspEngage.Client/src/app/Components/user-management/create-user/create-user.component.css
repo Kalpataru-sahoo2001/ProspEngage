@@ -1,0 +1,82 @@
+.form-container {
+    position: fixed;  /* Keep the form fixed at the top-right corner */
+    top: 0px;        /* Position from the top of the page */
+    right: 0px;      /* Position from the right edge of the page */
+    width: 460px;     /* Set the width of the form */
+    height: 950px;  /* Limit the height to 80% of the viewport height */
+    /* background: linear-gradient(to right, #ffe4c0, #e1f8ff);  */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Shadow for better visibility */
+    z-index: 1000;    /* Ensure it appears above other content */
+    overflow-y: auto; /* Allow vertical scrolling */
+  }
+   
+  .form-group-row {
+    display: flex;
+    gap: 2rem;
+  }
+   
+  .form-group {
+    flex: 1;
+  }
+   
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+  }
+   
+  .form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+   
+   
+    .form-container h2 {
+      /* text-align: center; */
+      margin-bottom: 20px;
+    }
+   
+    .form-group {
+      margin-bottom: 15px;
+    }
+   
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+   
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+   
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+   
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+   
+    .btn-cancel {
+      background-color: #f44336;
+      color: white;
+    }
+   
+    .btn-save {
+      background-color: #4caf50;
+      color: white;
+    }
+  

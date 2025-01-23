@@ -1,0 +1,143 @@
+<div class="modal-backdrop"></div>
+<div class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4>{{ isEditMode ? 'Edit Contact' : 'Create Contact' }}</h4>
+      <i class='bx bx-x'></i>
+      <button class="close-button" (click)="onClose()"><span>×</span></button>
+    </div>
+
+    <div class="modal-body">
+      <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="contactName" [(ngModel)]="contactToEdit.contactName" class="form-control"
+            required pattern="^[a-zA-Z ]+$" minlength="3" maxlength="256" #contactName="ngModel"
+            [ngClass]="{'ng-invalid': contactName.invalid && contactName.touched, 'ng-valid': contactName.valid && contactName.touched}" />
+          <div *ngIf="contactName.invalid && contactName.touched" class="error-message">
+            <small class="text-danger" *ngIf="contactName.errors?.['required']">Name is required.</small>
+            <small class="text-danger" *ngIf="contactName.errors?.['pattern']">Please enter a valid name (letters and
+              spaces only).</small>
+            <small class="text-danger" *ngIf="contactName.errors?.['minlength']">Name must be at least 3 characters
+              long.</small>
+            <small class="text-danger" *ngIf="contactName.errors?.['maxlength']">Name cannot exceed 256
+              characters.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="leadSource">Lead Source(Optional)</label>
+          <input type="text" id="leadSource" name="leadSource" [(ngModel)]="contactToEdit.leadSource"
+            class="form-control" #leadSource="ngModel"
+            [ngClass]="{'ng-invalid': leadSource.invalid && leadSource.touched, 'ng-valid': leadSource.valid && leadSource.touched}" />
+          <div *ngIf="leadSource.invalid && leadSource.touched" class="error-message">
+            <small class="text-danger">Field required</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email ID</label>
+          <input type="email" id="email" name="emailId" [(ngModel)]="contactToEdit.emailID" class="form-control"
+            required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{3,}\.[a-zA-Z]{2,}$" #email="ngModel"
+            [ngClass]="{'ng-invalid': email.invalid && email.touched, 'ng-valid': email.valid && email.touched}" />
+          <div *ngIf="email.invalid && email.touched" class="error-message">
+            <small class="text-danger" *ngIf="email.errors?.['required']">Email is required.</small>
+            <small class="text-danger" *ngIf="email.errors?.['pattern']">Please enter a valid email address (e.g.,
+              user&#64;gmail.com).</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phoneNumber" [(ngModel)]="contactToEdit.phoneNumber" class="form-control"
+            required pattern="^[0-9]{10}$" #phone="ngModel"
+            [ngClass]="{'ng-invalid': phone.invalid && phone.touched, 'ng-valid': phone.valid && phone.touched}" />
+          <div *ngIf="phone.invalid && phone.touched" class="error-message">
+            <small class="text-danger">Please enter a valid 10-digit phone number.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="company">Company Name</label>
+          <input type="text" id="company" name="companyName" [(ngModel)]="contactToEdit.companyName"
+            class="form-control" required pattern="^[a-zA-Z ]+$" #company="ngModel"
+            [ngClass]="{'ng-invalid': company.invalid && company.touched, 'ng-valid': company.valid && company.touched}" />
+          <div *ngIf="company.invalid && company.touched" class="error-message">
+            <small class="text-danger">Please enter a valid name (letters and spaces only).</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address(Optional)</label>
+          <input type="text" id="address" name="address" [(ngModel)]="contactToEdit.address" class="form-control"
+            #address="ngModel"
+            [ngClass]="{'ng-invalid': address.invalid && address.touched, 'ng-valid': address.valid && address.touched}" />
+        </div>
+
+        <div class="form-location">
+          <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country" name="country" [(ngModel)]="selectedCountryId" (change)="onCountryChange($event)"
+              class="form-control" required #country="ngModel"
+              [ngClass]="{'ng-invalid': country.invalid && country.touched, 'ng-valid': country.valid && country.touched}">
+              >
+              <option value="">Select Country</option>
+              <option *ngFor="let country of countries" [value]="country.countryId">
+                {{ country.countryName }}
+              </option>
+            </select>
+            <div *ngIf="country.invalid && country.touched" class="error-message">
+              <small class="text-danger">Country is required</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="state">State</label>
+            <select id="state" name="state" [(ngModel)]="selectedStateId" (change)="onStateChange($event)"
+              class="form-control" required #state="ngModel"
+              [ngClass]="{'ng-invalid': state.invalid && state.touched, 'ng-valid': state.valid && state.touched}">
+              <option value="">Select State</option>
+              <option *ngFor="let state of states" [value]="state.stateId">
+                {{ state.stateName }}
+              </option>
+            </select>
+            <div *ngIf="state.invalid && state.touched" class="error-message">
+              <small class="text-danger">State is required</small>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <select id="city" name="city" [(ngModel)]="contactToEdit.city" class="form-control" required #city="ngModel"
+              [ngClass]="{'ng-invalid': city.invalid && city.touched, 'ng-valid': city.valid && city.touched}">
+              <option value="">Select City</option>
+              <option *ngFor="let city of cities" [value]="city.cityName">
+                {{ city.cityName }}
+              </option>
+            </select>
+            <div *ngIf="city.invalid && city.touched" class="error-message">
+              <small class="text-danger">City is required</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="zip">ZIP</label>
+            <input type="text" id="zip" name="zip" [(ngModel)]="contactToEdit.pincode" class="form-control" required
+              pattern="^[0-9]{6}(?:-[0-9]{4})?$" #zip="ngModel"
+              [ngClass]="{'ng-invalid': zip.invalid && zip.touched, 'ng-valid': zip.valid && zip.touched}" />
+            <div *ngIf="zip.invalid && zip.touched" class="error-message">
+              <small class="text-danger" *ngIf="zip.errors?.['required']">ZIP is required.</small>
+              <small class="text-danger" *ngIf="zip.errors?.['pattern']">Please enter a valid ZIP code (5 digits or 9
+                digits with a hyphen).</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancel_btn" (click)="onCancel()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="save_edit_btn"
+            [disabled]="!contactForm.form.valid">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

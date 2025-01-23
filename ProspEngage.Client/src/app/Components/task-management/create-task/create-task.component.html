@@ -1,0 +1,156 @@
+<!-- Button to open modal -->
+
+<!-- Modal Container-->
+<div class="modal-container" >    
+  <div class="modal-backdrop" (click)="onClose()"></div>
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Create Task</h4>
+        <button class="close-button" (click)="onClose()"><span>×</span></button>
+      </div>
+
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+
+          <div class="form-group">
+            <label for="taskOwner">Task Owner*</label>
+            <input type="text" id="taskOwner" name="taskOwner" [(ngModel)]="taskData.taskOwner" 
+                   class="form-control" required #taskOwner="ngModel"
+                   [ngClass]="{'ng-invalid': taskOwner.invalid && taskOwner.touched}"/>
+            <div *ngIf="taskOwner.invalid && taskOwner.touched" class="error-message">
+              <small class="text-danger">Task Owner is required</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject*</label>
+            <input type="text" id="subject" name="subject" [(ngModel)]="taskData.subject" 
+                   class="form-control" required #subject="ngModel"
+                   [ngClass]="{'ng-invalid': subject.invalid && subject.touched}"/>
+            <div *ngIf="subject.invalid && subject.touched" class="error-message">
+              <small class="text-danger">Subject is required</small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="dueDate">Due Date*</label>
+              <input type="datetime-local" id="dueDate" name="dueDate" [(ngModel)]="taskData.dueDate" 
+                     class="form-control" required #dueDate="ngModel"
+                     [ngClass]="{'ng-invalid': dueDate.invalid && dueDate.touched}"/>
+              <div *ngIf="dueDate.invalid && dueDate.touched" class="error-message">
+                <small class="text-danger">Due date is required</small>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="relatedTo">Contact Name*</label>
+              <input type="text" id="relatedTo" name="relatedTo" [(ngModel)]="taskData.relatedTo" 
+                     class="form-control" required #relatedTo="ngModel"
+                     [ngClass]="{'ng-invalid': relatedTo.invalid && relatedTo.touched}"/>
+              <div *ngIf="relatedTo.invalid && relatedTo.touched" class="error-message">
+                <small class="text-danger">Related To is required</small>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="emailId">Email ID*</label>
+              <input type="email" 
+                     id="emailId" 
+                     name="emailId" 
+                     [(ngModel)]="taskData.emailId" 
+                     class="form-control" 
+                     required 
+                     pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+                     #emailId="ngModel"
+                     [ngClass]="{'ng-invalid': emailId.invalid && emailId.touched}"/>
+              <div *ngIf="emailId.invalid && emailId.touched" class="error-message">
+                <small class="text-danger">Please enter a valid email address</small>
+              </div>
+            </div>
+          
+            
+          </div>
+
+          
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="contactName">Account*</label>
+              <input type="text" 
+                     id="contactName" 
+                     name="contactName" 
+                     [(ngModel)]="taskData.contactName" 
+                     class="form-control" 
+                     required 
+                     pattern="^[a-zA-Z ]+$" 
+                     #contactName="ngModel"
+                     [ngClass]="{'ng-invalid': contactName.invalid && contactName.touched}"/>
+              <div *ngIf="contactName.invalid && contactName.touched" class="error-message">
+                <small class="text-danger">Please enter a valid name (letters and spaces only)</small>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="status">Status*</label>
+              <select id="status" name="statusId" [(ngModel)]="taskData.statusId" 
+                      class="form-control" required>
+                <option *ngFor="let option of statusOptions" [value]="option.id">
+                  {{ option.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <div class="form-group col-md-6">
+              <label for="priority">Priority*</label>
+              <select id="priority" name="priorityId" [(ngModel)]="taskData.priorityId" 
+                      class="form-control" required>
+                <option *ngFor="let option of priorityOptions" [value]="option.id">
+                  {{ option.text }}
+                </option>
+              </select>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="reminder" name="reminder" [(ngModel)]="taskData.reminder" 
+                     class="form-check-input" (change)="onReminderChange()"/>
+              <label class="form-check-label" for="reminder">Set Reminder</label>
+            </div>
+            <div class="form-group" *ngIf="taskData.reminder">
+              <label for="reminderDate">Reminder Date*</label>
+              <input type="datetime-local" id="reminderDate" name="reminderDate" 
+                     [(ngModel)]="taskData.reminderDate" class="form-control" required 
+                     #reminderDate="ngModel"
+                     [ngClass]="{'ng-invalid': reminderDate.invalid && reminderDate.touched}"/>
+              <div *ngIf="reminderDate.invalid && reminderDate.touched" class="error-message">
+                <small class="text-danger">Reminder date is required when reminder is enabled</small>
+              </div>
+            </div>
+          </div>
+
+         
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" [(ngModel)]="taskData.description" 
+                      class="form-control" rows="3"></textarea>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!taskForm.form.valid || isSubmitting">
+              {{ isSubmitting ? 'Saving...' : 'Save' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

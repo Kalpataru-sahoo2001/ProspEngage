@@ -1,0 +1,251 @@
+body 
+{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  /* margin-left: 220px; */
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.left h2 {
+  margin: 10px;
+  font-size: 35px;
+  color: #060000;
+  letter-spacing: -0.7%;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-box {
+  width: 230px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  padding-left: 30px;
+}
+
+.bi-search {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.btn-primary {
+  min-width: 138px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #2BA8E0, #1388C2);
+  color: #fff;
+  border: 1px solid #2BA8E0;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .top {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-container {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* //Update css */
+th {
+  position: relative;
+  padding-right: 30px;
+}
+
+.bi-filter,
+.bi-sort-up,
+.bi-sort-down {
+  color: black;  
+  position: absolute;
+  right: 10px;   
+  top: 50%;
+  transform: translateY(-50%); 
+  transition: color 0.3s, transform 0.3s;  
+}
+
+.bi-sort-up:hover,
+.bi-sort-down:hover {
+  color: #007bff;  /* Blue color on hover */
+  transform: scale(1.1);  /* Slightly scale the icon on hover */
+}
+
+.bi-sort-up.active,
+.bi-sort-down.active {
+  color: #28a745;  /* Green color for active sorted state */
+}
+
+.bi-sort-up.active:hover,
+.bi-sort-down.active:hover {
+  color: #218838;  /* Darker green on hover for active sorted state */
+}
+
+
+.bottom{
+  overflow-x: auto;
+  /* margin-left: 220px; */
+  overflow: scroll;
+}
+
+.task-table {
+  color: #000000;
+  border-radius: 0px;
+  width: 1633px;
+  border-collapse: separate; 
+  border-spacing: 0;        
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.task-table thead {
+  background-color: #f0f0f0;
+}
+
+.task-table th,
+.task-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #f0f0f0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  
+}
+
+.task-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f0f0f0;
+  
+}
+
+/* Fix the first four columns without changing the background color of values */
+.task-table th:nth-child(-n+4)
+{
+  position: sticky;
+  z-index: 2;
+  background-color: #f0f0f0;
+  
+}
+.task-table td:nth-child(-n+4) {
+  position: sticky;
+  z-index: 2;
+  background-color: white;
+}
+/* Individual column positions */
+.task-table th:nth-child(1),
+.task-table td:nth-child(1) {
+  left: 0;
+}
+/* Subject */
+.task-table th:nth-child(2){
+  left: 160px;
+}
+
+/* DueDate */
+.task-table th:nth-child(3){
+  left: 430.67px;
+}
+/* Status */
+.task-table th:nth-child(4){
+  left: 600.67px;
+}
+.edit-column {
+  position: sticky;
+  z-index: 2;
+  left: 0;
+  background-color: white;
+}
+/* Delete */
+.task-table td:nth-child(2) {
+  left: 68px;
+  background-color: white;
+  
+}
+/* Subject */
+.task-table td:nth-child(3) {
+  left: 150.67px;
+  background-color: white;
+}
+/* Status */
+.task-table td:nth-child(4) {
+  left: 420.67px;
+  background-color: white;
+}
+
+.task-status {
+  position: sticky;
+  z-index: 3;
+  left: 590.67px;
+  background-color: white;
+}
+
+/* Width for specific columns */
+.task-table thead .actions {
+  width: 88px;
+}
+
+.task-table thead .subject {
+  width: 272.67px;
+}
+
+.task-table thead .duedate {
+  width: 170px;
+}
+
+.task-table thead .status {
+  width: 159px;
+}
+
+.task-table thead .priority {
+  width: 154px;
+}
+
+.task-table thead .relatedto {
+  width: 225px;
+}

@@ -1,0 +1,188 @@
+<div class="form-container">
+    <h2>New User</h2>
+   
+    <form (ngSubmit)="onSubmit()" #createUserForm="ngForm" novalidate>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <select
+          id="title"
+          name="title"
+          [(ngModel)]="user.title"
+          required
+          class="form-control"
+          #title="ngModel"
+        >
+          <option value="" disabled>Select Title</option>
+          <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
+        </select>
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error-message">
+          <small>Title is required.</small>
+        </div>
+      </div>
+   
+   
+      <div class="form-group-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            [(ngModel)]="user.firstName"
+            required
+            minlength="3"
+            maxlength="50"
+            class="form-control"
+            placeholder="Enter First Name"
+            #firstName="ngModel"
+          />
+          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="error-message">
+            <small *ngIf="firstName.errors?.['required']">First Name is required.</small>
+            <small *ngIf="firstName.errors?.['minlength']">Minimum 3 characters required.</small>
+            <small *ngIf="firstName.errors?.['maxlength']">Maximum 50 characters allowed.</small>
+          </div>
+        </div>
+   
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            [(ngModel)]="user.lastName"
+            required
+            minlength="3"
+            maxlength="50"
+            class="form-control"
+            placeholder="Enter Last Name"
+            #lastName="ngModel"
+          />
+          <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error-message">
+            <small *ngIf="lastName.errors?.['required']">Last Name is required.</small>
+            <small *ngIf="lastName.errors?.['minlength']">Minimum 3 characters required.</small>
+            <small *ngIf="lastName.errors?.['maxlength']">Maximum 50 characters allowed.</small>
+          </div>
+        </div>
+      </div>
+   
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="user.email"
+          required
+          email
+          class="form-control"
+          placeholder="Enter Email"
+          #email="ngModel"
+        />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+          <small *ngIf="email.errors?.['required']">Email is required.</small>
+          <small *ngIf="email.errors?.['email']">Enter a valid email address.</small>
+        </div>
+      </div>
+   
+      <div class="form-group">
+        <label for="mobile">Mobile Number</label>
+        <input
+          type="text"
+          id="mobile"
+          name="mobile"
+          [(ngModel)]="user.mobile"
+          class="form-control"
+          placeholder="Enter Mobile Number"
+          #mobile="ngModel"
+        />
+      </div>
+   
+      <!-- <div class="form-group">
+        <label for="role">Role</label>
+        <select id="role" name="role" [(ngModel)]="user.role" required class="form-control" #role="ngModel">
+          <option value="" disabled>Select Role</option>
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+        <div *ngIf="role.invalid && (role.dirty || role.touched)" class="error-message">
+          <small>Role is required.</small>
+        </div>
+      </div>
+   
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" name="status" [(ngModel)]="user.status" required class="form-control" #status="ngModel">
+          <option value="" disabled>Select Status</option>
+          <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+        </select>
+        <div *ngIf="status.invalid && (status.dirty || status.touched)" class="error-message">
+          <small>Status is required.</small>
+        </div>
+      </div>
+   
+      <div class="form-group">
+        <label for="profile">Profile</label>
+        <select id="profile" name="profile" [(ngModel)]="user.profile" required class="form-control" #profile="ngModel">
+          <option value="" disabled>Select Profile</option>
+          <option *ngFor="let profile of profiles" [value]="profile">{{ profile }}</option>
+        </select>
+        <div *ngIf="profile.invalid && (profile.dirty || profile.touched)" class="error-message">
+          <small>Profile is required.</small>
+        </div>
+      </div>
+    -->
+   
+   
+    <div class="form-group">
+      <label for="roleId">Role</label>
+      <select id="roleId" name="roleId" [(ngModel)]="user.roleId" class="form-control" required>
+        <option value="" disabled>Select Role</option>
+        <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+      </select>
+    </div>
+   
+    <div class="form-group">
+      <label for="profileId">Profile</label>
+      <select id="profileId" name="profileId" [(ngModel)]="user.profileId" class="form-control" required>
+        <option value="" disabled>Select Profile</option>
+        <option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.name }}</option>
+      </select>
+    </div>
+   
+    <div class="form-group">
+      <label for="statusId">Status</label>
+      <select id="statusId" name="statusId" [(ngModel)]="user.statusId" class="form-control" required>
+        <option value="" disabled>Select Status</option>
+        <option *ngFor="let status of statuses" [value]="status.id">{{ status.name }}</option>
+      </select>
+    </div>
+      <!-- Permissions (commented for future use) -->
+      <!--
+      <div class="form-group">
+        <label for="permissions">Permissions</label>
+        <div>
+          <input
+            type="checkbox"
+            id="selectAll"
+            [checked]="isAllSelected()"
+            (change)="toggleAll($event)"
+          />
+          <label for="selectAll">Select All</label>
+        </div>
+        <div *ngFor="let permission of permissions">
+          <input
+            type="checkbox"
+            [value]="permission"
+            [(ngModel)]="user.permissions"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <label>{{ permission }}</label>
+        </div>
+      </div>
+      -->
+   
+      <div class="form-buttons">
+        <button type="button" class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="btn btn-save" [disabled]="!createUserForm.valid">Save</button>
+      </div>
+    </form>
+  </div>

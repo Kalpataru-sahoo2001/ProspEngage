@@ -1,0 +1,50 @@
+
+<div class="container">
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+ 
+    <div *ngIf="lead" class="card">
+      <div class="card-header">
+        <h2 class="text-center">Lead Details</h2>
+        <button class="btn btn-secondary" (click)="onClose()">Close</button>
+      </div>
+     
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Personal Information</h3>
+            <p><strong>Name:</strong> {{ lead.firstName }} {{ lead.lastName }}</p>
+            <p><strong>Job Title:</strong> {{ lead.jobTitle }}</p>
+            <p><strong>Email:</strong> {{ lead.email }}</p>
+            <p><strong>Phone:</strong> {{ lead.phoneNumber }}</p>
+            <p>
+              <strong>LinkedIn:</strong>
+              <a [href]="lead.sourceProfile" target="_blank">Profile</a>
+            </p>
+          </div>
+         
+          <div class="col-md-6">
+            <h3>Company Information</h3>
+            <p><strong>Company:</strong> {{ lead.company }}</p>
+            <p><strong>Employees:</strong> {{ lead.numberOfEmployees }}</p>
+            <p><strong>Deal Size:</strong> ${{ lead.dealSize | number }}</p>
+            <p><strong>Budget:</strong> ${{ lead.budget | number }}</p>
+            <p><strong>Lead Status:</strong> {{ lead.leadStatus }}</p>
+          </div>
+        </div>
+ 
+        <div class="row mt-4">
+          <div class="col-12">
+            <h3>Additional Details</h3>
+            <p><strong>Authority:</strong> {{ lead.authority }}</p>
+            <p><strong>Need:</strong> {{ lead.need }}</p>
+            <p><strong>Timeline:</strong> {{ lead.timeline }}</p>
+            <p><strong>Lead Source:</strong> {{ lead.leadSource }}</p>
+            <p><strong>Comments:</strong> {{ lead.comments }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
